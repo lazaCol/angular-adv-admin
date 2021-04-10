@@ -9,6 +9,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 const routes: Routes = [
     {
@@ -51,12 +52,18 @@ const routes: Routes = [
             component: PerfilComponent,
             data: { titulo: 'Perfil'},
           },
-        //   {
-        //     path: '',
-        //     redirectTo: '/dashboard',
-        //     pathMatch: 'full',
-        //   },
-        ]
+          //   {
+            //     path: '',
+            //     redirectTo: '/dashboard',
+            //     pathMatch: 'full',
+            //   },
+            //mantenimientos
+            {
+              path: 'usuarios',
+              component: UsuariosComponent,
+              data: { titulo: 'Usuarios'},
+            },
+          ]
       },
 ];
 
