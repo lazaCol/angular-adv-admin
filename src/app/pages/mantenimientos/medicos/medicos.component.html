@@ -1,0 +1,88 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search medicos"
+          (keyup)="buscar(txtTermino.value)"
+          #txtTermino
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="cargando" class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="alert alert-info text-center" role="alert">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Please wait</p>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn fast" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <h4 class="card-title">Total de medicos ({{ medicos.length }})</h4>
+            <h6 class="card-subtitle">Medicos registrados.</h6>
+          </div>
+          <div class="col-6">
+            <div class="text-right">
+              <a [routerLink]="['/dashboard/medico', 'New']"  class="btn btn-primary">
+                <i class="fa fa-hospital-o"></i> Crear
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Foto</th>
+                <th>Nombre</th>
+                <th class="text-nowrap w100">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let medico of medicos">
+                <td class="text-center">
+                  <img
+                    [src]="medico.img! | images: 'medicos'"
+                    alt="hospital.nombre"
+                    class="avatar pointer"
+                    (click)="abrirModal(medico)"
+                  />
+                </td>
+                <td>{{ medico.nombre }}</td>
+                <td class="text-nowrap text-center">
+                  <a
+                    [routerLink]="['/dashboard/medico', medico._id]"
+                    data-toggle="tooltip"
+                    data-original-title="Edit"
+                  >
+                    <i class="fa fa-pencil text-inverse pointer m-r-10"></i>
+                  </a>
+                  <a (click)="eliminarMedico(medico)" data-toggle="tooltip" data-original-title="Delete">
+                    <i class="fa fa-close text-danger pointer"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <div *ngIf="txtTermino.value.length === 0">
+                      <button  class="btn btn-secondary">Anterior</button>
+                      &nbsp;
+                      <button  class="btn btn-secondary">Siguiente</button>
+                  </div> -->
+      </div>
+    </div>
+  </div>
+</div>
