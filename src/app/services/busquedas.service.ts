@@ -29,6 +29,10 @@ export class BusquedasService {
     return resultados.map(user => new Usuario(user.nombre, user.email, "", user.img, user.google, user.role, user.uid));
   }
 
+  busquedaGlobal(termino: string){
+    return this.http.get(`${baseUrl}/todo/${termino}`, this.headers)
+  }
+
   buscar(tipo: 'usuarios'|'medicos'|'hospitales', termino: string){
     return this.http.get<any[]>(`${baseUrl}/todo/coleccion/${tipo}/${termino}`, this.headers)
     .pipe(
